@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_20_154859) do
+ActiveRecord::Schema.define(version: 2021_06_20_192740) do
+
+  create_table "agendamentos", force: :cascade do |t|
+    t.integer "pet_id", null: false
+    t.integer "servico_id", null: false
+    t.integer "usuario_id", null: false
+    t.string "data"
+    t.text "observacao"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pet_id"], name: "index_agendamentos_on_pet_id"
+    t.index ["servico_id"], name: "index_agendamentos_on_servico_id"
+    t.index ["usuario_id"], name: "index_agendamentos_on_usuario_id"
+  end
 
   create_table "cargos", force: :cascade do |t|
     t.string "nome"
@@ -18,6 +31,27 @@ ActiveRecord::Schema.define(version: 2021_06_20_154859) do
     t.string "permissao"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "clientes", force: :cascade do |t|
+    t.string "nome"
+    t.string "endereco"
+    t.string "telefone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "pets", force: :cascade do |t|
+    t.string "nome"
+    t.string "raca"
+    t.string "cor"
+    t.string "idade"
+    t.string "porte"
+    t.text "observacao"
+    t.integer "cliente_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cliente_id"], name: "index_pets_on_cliente_id"
   end
 
   create_table "servicos", force: :cascade do |t|
@@ -60,6 +94,10 @@ ActiveRecord::Schema.define(version: 2021_06_20_154859) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "agendamentos", "pets"
+  add_foreign_key "agendamentos", "servicos"
+  add_foreign_key "agendamentos", "usuarios"
+  add_foreign_key "pets", "clientes"
   add_foreign_key "usuario_cargos", "cargos"
   add_foreign_key "usuario_cargos", "usuarios"
 end

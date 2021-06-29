@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :agendamentos
+  resources :pets
+  resources :clientes
   resources :servicos
   devise_for :users
   resources :usuario_cargos
