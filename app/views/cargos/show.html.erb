@@ -1,19 +1,32 @@
-<p id="notice"><%= notice %></p>
+<%= stylesheet_link_tag "style_padrao_novo.css" %>
+<%= stylesheet_link_tag "style_padrao_visualizar.css" %>
 
-<p>
-  <strong>Nome:</strong>
-  <%= @cargo.nome %>
-</p>
+<%= render 'header'  %>
+<h1 class="text-whitesmoke">Cargo</h1>
+<body class="main-bg">
+  <div class="login-container text-c animated flipInX">
+    <div class="container-content">
+      <%= form_with() do |form| %>
+        <div class="field">        
+          <strong>Nome:</strong><br>
+          <%= form.text_field :nome,value: @cargo.nome,:disabled => true  %>
+        </div>
 
-<p>
-  <strong>Descricao:</strong>
-  <%= @cargo.descricao %>
-</p>
+        <div class="field">        
+          <strong>Descrição:</strong><br>
+          <%= form.text_area :descricao,value: @cargo.descricao,:disabled => true  %>
+        </div>
 
-<p>
-  <strong>Permissao:</strong>
-  <%= @cargo.permissao %>
-</p>
+        <div class="field">
+          <strong>Permissão:</strong><br>
+          <%= form.text_field :permissao,value: @cargo.permissao,:disabled => true %>
+        </div>
+      <% end %>
+      <div class="form-group field">    
+        <%= link_to "Voltar", :back %>
+      </div>
+    </div>
+  </div>
+</body>
 
-<%= link_to 'Edit', edit_cargo_path(@cargo) %> |
-<%= link_to 'Back', cargos_path %>
+<%= render 'footer'  %>
